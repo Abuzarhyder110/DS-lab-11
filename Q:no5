@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+void s(int a[], int n, int i = 1) {
+    (i < n) && ([&]() {
+        int k = a[i], j = i - 1;
+        (j >= 0) && ([&]() {
+            (a[j] < k) && ([&]() {
+                a[j + 1] = a[j];
+                --j;
+                return true;
+            }(), true);
+            return true;
+        }(), true);
+        a[j + 1] = k;
+        s(a, n, i + 1);
+    }(), true);
+}
+
+void p(int a[], int n, int i = 0) {
+    (i < n) && ([&]() {
+        cout << a[i] << " ";
+        p(a, n, i + 1);
+    }(), true);
+}
+
+int main() {
+    int a[] = {12, 11, 13, 5, 6};
+    int n = sizeof(a) / sizeof(a[0]);
+
+    p(a, n);
+    cout << endl;
+
+    s(a, n);
+
+    p(a, n);
+    cout << endl;
+
+    return 0;
+}
